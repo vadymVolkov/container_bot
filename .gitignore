@@ -1,0 +1,7 @@
+.idea
+/data
+/config
+/containerBot_env
+/ssl_cert
+/__pycache__
+.DS_Store
