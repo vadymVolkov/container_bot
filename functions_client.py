@@ -42,7 +42,7 @@ class Function:
         response = message.text
         empty_keyboard = telebot.types.ReplyKeyboardRemove(selective=False)
         if response == 'Найти контейнер по городу':
-            msg = self.bot.send_message(user_id, 'В каком городе искать контейнер?', reply_markup=empty_keyboard)
+            msg = self.bot.send_message(user_id, 'В каком городе искать контейнер? (покажу первые десять контейнеров)', reply_markup=empty_keyboard)
             self.bot.register_next_step_handler(msg, self.find_container_by_city_name)
 
     def find_container_by_city_name(self, message):
@@ -52,15 +52,17 @@ class Function:
         user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
         container_list = commands.get_container_list_by_city_name_in_table(table_name, response)
         if container_list:
+            container_list = container_list[0:10]
             user_markup.row('Продолжить работу с таблицей-' + table_name)
             user_markup.row('Посмотреть список Таблиц')
             user_markup.row('В главное меню')
             self.bot.send_message(user_id, 'В этом городе найдено:', reply_markup=user_markup)
             for container in container_list:
+                answer = commands.make_container_report(container)
                 text = ''
                 for b in container:
                     text = text + str(b) + ' '
-                self.bot.send_message(user_id, text, reply_markup=user_markup)
+                self.bot.send_message(user_id, answer, reply_markup=user_markup)
                 time.sleep(1)
 
 

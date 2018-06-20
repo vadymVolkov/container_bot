@@ -291,3 +291,26 @@ def get_container_list_by_city_name_in_table(table_name, city_name):
 def set_file_in_db_status(status, table_name):
     database.set_file_in_db_stAtus_in_table_list(status, table_name)
 
+
+
+
+def make_container_report(container):
+    container_list = []
+    for data in container:
+        if data is None:
+            data = ' '
+            container_list.append(data)
+        else:
+            container_list.append(data)
+    msg = 'Направление: ' + container_list[6] + '\n' +\
+          'Экспидитор: ' + container_list[7] + '\n' +\
+          'Номер контейнера: ' + container_list[8] + '\n' + \
+          'Тип контейнера: ' + container_list[9] + '\n' + \
+          'Линия: ' + container_list[10] + '\n' + \
+          'Отправитьль\Получатель: ' + container_list[14] + '\n' + \
+          'Город: ' + container_list[15].capitalize() + '\n' +\
+          'Страна: ' + container_list[16] + '\n' + \
+          'Перевозчик: ' + container_list[17] + '\n' + \
+          'Режим: ' + container_list[18] + '\n' + \
+          'Ориентир: ' + container_list[19]
+    return msg
