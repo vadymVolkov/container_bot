@@ -13,7 +13,6 @@ class Function:
         user_id = message.from_user.id
         user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
         user_markup.row('Посмотреть список Таблиц')
-        user_markup.row('Создать новую Таблицу')
         self.bot.send_message(user_id, 'Добро пожаловать! Выберите команду:', reply_markup=user_markup)
 
     def get_list_of_db(self, message):
@@ -59,9 +58,6 @@ class Function:
             self.bot.send_message(user_id, 'В этом городе найдено:', reply_markup=user_markup)
             for container in container_list:
                 answer = commands.make_container_report(container)
-                text = ''
-                for b in container:
-                    text = text + str(b) + ' '
                 self.bot.send_message(user_id, answer, reply_markup=user_markup)
                 time.sleep(1)
 

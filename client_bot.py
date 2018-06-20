@@ -79,6 +79,13 @@ def handle_text(message):
     function.select_table(message)
 
 
+@bot.message_handler(
+    func=lambda mess: commands.check_continue_work_with_table(mess),
+    content_types=['text'])
+def handle_text(message):
+    message.text = message.text.split('-')[1]
+    function.select_table(message)
+
 
 
 # Remove webhook, it fails sometimes the set if there is a previous webhook
