@@ -125,6 +125,12 @@ class Function:
             commands.set_table_status(False, table_name)
             self.bot.send_message(user_id, 'Таблица деактивирована.',
                                   reply_markup=user_markup)
+        elif response == 'В главное меню':
+            user_id = message.from_user.id
+            user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
+            user_markup.row('Посмотреть список Таблиц')
+            user_markup.row('Создать новую Таблицу')
+            self.bot.send_message(user_id, 'Добро пожаловать! Выберите команду:', reply_markup=user_markup)
 
     def create_new_table_step1(self, message):
         user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
@@ -193,7 +199,7 @@ class Function:
             commands.add_new_original_city_name_and_possible(entered_original_city_name, unknown_city_name)
         if len(unknown_city) > 0:
             msg = self.bot.send_message(user_id, 'Что это за город ' + unknown_city[0] + '?',
-                                  reply_markup=empty_keyboard)
+                                        reply_markup=empty_keyboard)
             self.bot.register_next_step_handler(msg, self.unknown_city_formating_step2)
         else:
             user_markup.row('Продолжить работу с таблицей-' + table_name)
